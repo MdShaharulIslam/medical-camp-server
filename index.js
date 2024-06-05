@@ -262,11 +262,10 @@ async function run() {
   }
 }
 run().catch(console.dir);
-
+// soe
 app.get('/', (req, res) => {
   res.send("Welcome to MediCamp Server");
 })
-
 app.listen(port, (req, res) => {
   console.log(`The server is listening ${port}`);
 });
