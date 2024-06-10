@@ -9,7 +9,12 @@ const stripe = require('stripe')(process.env.STRIPE_SERVER_KEY);
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({origin:[
+ 'https://medicampclient.web.app',
+ 'https://medicampclient.firebaseapp.com'
+
+],
+credentials:true}));
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.lcvsatz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 const client = new MongoClient(uri, {
@@ -38,7 +43,7 @@ async function run() {
       const token = jwt.sign(user, process.env.ACCESS_TOKEN, { expiresIn: 3600000 });
       res.send({ token });
     });
-
+// deploy
     const verifyToken = (req, res, next) => {
       if (!req.headers.authorization) {
         return res.status(401).send({ message: "unauthorized access" });
