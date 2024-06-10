@@ -6,7 +6,7 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app = express();
 const port = process.env.PORT || 5000;
 const stripe = require('stripe')(process.env.STRIPE_SERVER_KEY);
-// ss
+
 // Middleware
 app.use(express.json());
 app.use(cors());
@@ -217,6 +217,8 @@ async function run() {
     app.post('/create-payment-intent', async (req, res) => {
       const { fees } = req.body;
       const amount = parseInt(fees * 100);
+      console.log({fees});
+      
       const paymentIntent = await stripe.paymentIntents.create({
         amount: amount,
         currency: 'usd',
