@@ -10,6 +10,7 @@ const stripe = require('stripe')(process.env.STRIPE_SERVER_KEY);
 // Middleware
 app.use(express.json());
 app.use(cors({origin:[
+  // 'http://localhost:5173',
  'https://medicampclient.web.app',
  'https://medicampclient.firebaseapp.com'
 
